@@ -1,4 +1,26 @@
-## Remote build
+# Remote build
+
+## Getting started
+
+### Build the docker file locally
+
+```bash
+docker build -f Dockerfile.remotebuild -t remote-build .
+```
+
+### Run the docker file locally
+
+```bash
+docker run --rm --publish 9000:9000 remote-build
+```
+
+### Build request from client
+
+```bash
+cd examples
+# then with any of your substreams that you have zipped up: zip -r substreams.zip ./substreams
+go run main.go substreams.zip
+```
 
 The remote build needs some prerequisite files:
 
@@ -22,24 +44,4 @@ build: protogen
 .PHONE: package
 package: build
 	substreams pack -o substreams.spkg substreams.yaml
-```
-
-### Build the docker file locally
-
-```bash
-docker build -f Dockerfile.remotebuild -t remote-build .
-```
-
-### Run the docker file locally
-
-```bash
-docker run --rm --publish 9000:9000 remote-build
-```
-
-### Build request from client
-
-```bash
-cd examples
-# then with any of your substreams that you have zipped up: zip -r substreams.zip ./substreams
-go run main.go substreams.zip
 ```
